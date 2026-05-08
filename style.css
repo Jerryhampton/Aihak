@@ -1,0 +1,316 @@
+/* ===== VÄRIMUUTTUJAT ===== */
+:root {
+  --bg: #000000;
+  --primary: #00ff41;
+  --secondary: #ff00ff;
+  --accent: #00ffff;
+  --text: #e0e0e0;
+  --card-bg: rgba(0, 255, 65, 0.05);
+  --glow: 0 0 10px var(--primary), 0 0 20px var(--primary), 0 0 40px var(--primary);
+  --glow-sec: 0 0 10px var(--secondary), 0 0 20px var(--secondary);
+}
+
+/* ===== TEEMA 2: PINKKI / ORANSSI ===== */
+body.theme-2 {
+  --primary: #ff6b35;
+  --secondary: #ff006e;
+  --accent: #ffbe0b;
+  --card-bg: rgba(255, 107, 53, 0.05);
+}
+
+/* ===== TEEMA 3: SININEN / VIOLETTI ===== */
+body.theme-3 {
+  --primary: #7b2fff;
+  --secondary: #00d4ff;
+  --accent: #ff2fff;
+  --card-bg: rgba(123, 47, 255, 0.05);
+}
+
+/* ===== PERUS ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Share Tech Mono', monospace;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow-x: hidden;
+  transition: all 0.4s ease;
+  cursor: crosshair;
+}
+
+/* ===== PARTIKKELIKANGAS ===== */
+#particles {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ===== SKANNAVIIVAT ===== */
+.scanlines {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+}
+
+/* ===== SISÄLTÖ ===== */
+.container {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 3rem 2rem;
+  max-width: 700px;
+  width: 100%;
+}
+
+/* ===== GLITCH-OTSIKKO ===== */
+.glitch-wrapper {
+  margin-bottom: 2rem;
+}
+
+.glitch {
+  font-family: 'Orbitron', sans-serif;
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 900;
+  color: var(--primary);
+  text-shadow: var(--glow);
+  position: relative;
+  display: inline-block;
+  letter-spacing: 0.1em;
+  animation: flicker 5s infinite;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+}
+
+.glitch::before {
+  color: var(--secondary);
+  animation: glitch-1 3s infinite;
+  clip-path: polygon(0 0, 100% 0, 100% 35%, 0 35%);
+}
+
+.glitch::after {
+  color: var(--accent);
+  animation: glitch-2 3s infinite;
+  clip-path: polygon(0 65%, 100% 65%, 100% 100%, 0 100%);
+}
+
+@keyframes glitch-1 {
+  0%, 90%, 100% { transform: translate(0); }
+  92% { transform: translate(-3px, 1px); }
+  94% { transform: translate(3px, -1px); }
+  96% { transform: translate(-2px, 2px); }
+}
+
+@keyframes glitch-2 {
+  0%, 88%, 100% { transform: translate(0); }
+  90% { transform: translate(3px, -2px); }
+  93% { transform: translate(-3px, 1px); }
+  97% { transform: translate(2px, -1px); }
+}
+
+@keyframes flicker {
+  0%, 97%, 100% { opacity: 1; }
+  98% { opacity: 0.7; }
+  99% { opacity: 1; }
+  99.5% { opacity: 0.5; }
+}
+
+/* ===== KIRJOITUSEFEKTI ===== */
+.typewriter {
+  font-size: 1rem;
+  color: var(--accent);
+  margin-bottom: 2rem;
+  min-height: 1.5em;
+  letter-spacing: 0.05em;
+}
+
+/* ===== KORTTI ===== */
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--primary);
+  border-left: 4px solid var(--primary);
+  box-shadow: var(--glow), inset 0 0 30px rgba(0,255,65,0.03);
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: var(--glow-sec), inset 0 0 30px rgba(255,0,255,0.05);
+  border-color: var(--secondary);
+}
+
+.card p {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.card p:last-child { margin-bottom: 0; }
+
+.highlight {
+  color: var(--secondary);
+  text-shadow: var(--glow-sec);
+  font-style: italic;
+}
+
+/* ===== NAPIT ===== */
+.button-row {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.btn {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  padding: 0.8rem 1.8rem;
+  background: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+  box-shadow: var(--glow);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 0; height: 0;
+  background: var(--primary);
+  opacity: 0.15;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  transition: width 0.4s ease, height 0.4s ease;
+}
+
+.btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn:hover {
+  color: var(--bg);
+  background: var(--primary);
+  box-shadow: var(--glow), 0 0 60px var(--primary);
+  transform: translateY(-2px);
+}
+
+.btn:active {
+  transform: translateY(1px) scale(0.97);
+}
+
+.btn-alt {
+  color: var(--secondary);
+  border-color: var(--secondary);
+  box-shadow: var(--glow-sec);
+}
+
+.btn-alt::before { background: var(--secondary); }
+
+.btn-alt:hover {
+  color: var(--bg);
+  background: var(--secondary);
+  box-shadow: var(--glow-sec), 0 0 60px var(--secondary);
+}
+
+/* ===== LASKURI ===== */
+.counter-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding: 1rem;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.counter-label {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.4);
+  letter-spacing: 0.2em;
+}
+
+.counter-value {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--primary);
+  text-shadow: var(--glow);
+  transition: transform 0.1s ease, color 0.3s ease;
+  min-width: 3ch;
+  text-align: left;
+}
+
+.counter-value.bump {
+  transform: scale(1.3);
+}
+
+/* ===== STATUSRIVI ===== */
+.status-bar {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.25);
+  letter-spacing: 0.1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.blink {
+  color: var(--primary);
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ===== SHAKE-ANIMAATIO ===== */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px) rotate(-1deg); }
+  40% { transform: translateX(6px) rotate(1deg); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(4px); }
+}
+
+.shake {
+  animation: shake 0.4s ease;
+}
